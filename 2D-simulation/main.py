@@ -1,4 +1,5 @@
 import re
+import time
 
 import pygame
 import sys
@@ -8,9 +9,9 @@ from mqtt import mqtt
 
 
 #Variables
-width,height = 50,50
-rect_width=10
-numOfAgents = 100
+width,height = 400,400
+rect_width = 1
+numOfAgents = 300
 genre = "ROCK" #Init the genre currently playing
 
 # connecteer met mqtt op host *.101 en poort 1883
@@ -31,14 +32,14 @@ def visualize_dancefloor():
     while 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT : sys.exit()
-
+        screen.fill((0,0,0))
         grid.draw(screen)
-        #grid.updateDancers()
+        grid.updateDancers()
 
         # refresh scherm
         pygame.display.update()
 
-        #time.sleep(1)
+        #time.sleep(0.01)
 
 #Connecteer met Mqtt Host
 def start_dj_listener():

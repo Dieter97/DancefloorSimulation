@@ -5,36 +5,38 @@ import pygame
 
 from Agent import Agent
 
+
 class Grid:
 
-    def __init__(self,numberofAgents,width,height):
+    def __init__(self, numberofAgents, width, heigth):
         self.numAgents = numberofAgents
-        self.dancers = [Agent("SIM",np.random.randint(0,width),np.random.randint(0,height)) for i in range(numberofAgents)]
+        self.width = width
+        self.heigth = heigth
+        self.dancers = [Agent("SIM", np.random.randint(0, width), np.random.randint(0, heigth)) for i in
+                        range(numberofAgents)]
         print()
 
-    def draw(self,screen):
+    def draw(self, screen):
         for i in range(self.numAgents):
-             pygame.draw.circle(screen,  self.dancers[i].getColor(), (self.dancers[i].posX,  self.dancers[i].posY), 15)
+            pygame.draw.circle(screen, self.dancers[i].getColor(), (self.dancers[i].posX, self.dancers[i].posY), 10)
 
     def updateDancers(self):
         """
         Changes the dancers' (agents) like rates
         """
-        dirs = [[0,-1],[0,1],[1,0],[-1,0]]
-        for i in range(self.x):
-            for j in range(self.y):
-                neighbours = []
-                shuffle(dirs)
-                for dir in dirs:
-                    if i == 0 and dir[0] == -1 or j == 0 and dir[1] == -1:
-                        continue
-                    try:
-                        neighbours.append(self.dancers[i+dir[0]][j+dir[1]])
-                    except IndexError:
-                        pass
-                self.dancers[i][j].calculateNewLikeRates(neighbours)
+        for dancer in self.dancers:
+            neighbours = []
+            for peer in self.dancers:
+                if dancer == peer:
+                    continue
+                if (self.calculateDistance(dancer.posX,peer.posX,dancer.posY,peer.posY) < 100):
+                    neighbours.append(peer)
+            dancer.updatePosistion(neighbours,self.width,self.heigth)
 
-    def getDancersVotes(self,genre):
+    def calculateDistance(self,x1,x2,y1,y2):
+        return np.sqrt(np.power(x1 - x2, 2) + np.power(y1 - y2, 2))
+
+    def getDancersVotes(self, genre):
         """
         Gets all votes from all dancers
         :param genre the currently playing genre
