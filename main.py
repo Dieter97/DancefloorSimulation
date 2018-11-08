@@ -9,7 +9,7 @@ from mqtt import mqtt
 
 
 #Variables
-width,height = 200,200
+width,height = 100,100
 rect_width=10
 genre = "ROCK" #Init the genre currently playing
 
@@ -22,6 +22,7 @@ def visualize_dancefloor():
     global grid
     #initializeer pygame scherm met size 500x500 pixels
     pygame.init()
+
     screen=pygame.display.set_mode((width*rect_width,height*rect_width))
     #teken een vierkant op het scherm op positie x=0,y=0 met een breedte van 10
     grid = Grid(width,height)
@@ -36,7 +37,7 @@ def visualize_dancefloor():
         # refresh scherm
         pygame.display.update()
 
-        #time.sleep(0.5)
+        #time.sleep(1)
 
 #Connecteer met Mqtt Host
 def start_dj_listener():

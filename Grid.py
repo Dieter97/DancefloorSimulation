@@ -25,10 +25,12 @@ class Grid:
                 neighbours = []
                 shuffle(dirs)
                 for dir in dirs:
+                    if i == 0 and dir[0] == -1 or j == 0 and dir[1] == -1:
+                        continue
                     try:
                         neighbours.append(self.dancers[i+dir[0]][j+dir[1]])
                     except IndexError:
-                        continue
+                        pass
                 self.dancers[i][j].calculateNewLikeRates(neighbours)
 
     def getDancersVotes(self,genre):
