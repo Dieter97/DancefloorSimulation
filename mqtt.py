@@ -4,7 +4,7 @@ import paho.mqtt.client as mqttclient
 class mqtt:
     listeners = []
 
-    def __init__(self, host, port, client_id="DancefloorGrid", topic="dancefloor/dj/dieter1/#"):
+    def __init__(self, host, port, client_id="DancefloorGrid_Dieter", topic="dancefloor/dj/dieter1/#"):
         self.host = host
         self.port = port
         self.topic = topic

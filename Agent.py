@@ -15,7 +15,8 @@ class Agent:
         self.techno = random[2]
 
         self.username = username
-        self.uid = uuid.uuid1()
+        self.uid = uuid.uuid4()
+
 
     def getTaste(self):
         _tmp = [self.rock,self.pop,self.techno]
@@ -56,6 +57,12 @@ class Agent:
         return 0.25 * self.getLikeRate(genre) + 0.25 * np.random.uniform(0,1)
 
     def calculateNewLikeRates(self,neighbours):
+        """
+        Defines the behaviour of the agent
+        Calculate the new likerates based on the neighbours"s most liked genre
+        :param neighbours: a list with neighbour agents
+        :return: nothing
+        """
         for neighbour in neighbours:
             nTaste = neighbour.getTaste()
             influencFactor = neighbour.getInfluenceFactor(nTaste)
@@ -81,7 +88,11 @@ class Agent:
             self.techno = 0
         #print(self.rock+self.pop+self.techno)
 
+
     def vote(self,genre):
+        """
+        :return: json string : the vote message
+        """
         if self.getTaste() == genre:
             return json.dumps({"timestamp":datetime.datetime.now().isoformat(),
                        "value": 1,

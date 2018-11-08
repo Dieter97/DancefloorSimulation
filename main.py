@@ -9,7 +9,7 @@ from mqtt import mqtt
 
 
 #Variables
-width,height = 100,100
+width,height = 50,50
 rect_width=10
 genre = "ROCK" #Init the genre currently playing
 

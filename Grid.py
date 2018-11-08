@@ -19,6 +19,9 @@ class Grid:
                 pygame.draw.rect(screen,  self.dancers[i][j].getColor(), rect)
 
     def updateDancers(self):
+        """
+        Changes the dancers' (agents) like rates
+        """
         dirs = [[0,-1],[0,1],[1,0],[-1,0]]
         for i in range(self.x):
             for j in range(self.y):
@@ -34,6 +37,11 @@ class Grid:
                 self.dancers[i][j].calculateNewLikeRates(neighbours)
 
     def getDancersVotes(self,genre):
+        """
+        Gets all votes from all dancers
+        :param genre the currently playing genre
+        :return a list with all votes
+        """
         result = []
         for i in range(self.x):
             for j in range(self.y):
