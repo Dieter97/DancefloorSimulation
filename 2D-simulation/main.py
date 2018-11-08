@@ -10,6 +10,7 @@ from mqtt import mqtt
 #Variables
 width,height = 50,50
 rect_width=10
+numOfAgents = 100
 genre = "ROCK" #Init the genre currently playing
 
 # connecteer met mqtt op host *.101 en poort 1883
@@ -25,14 +26,14 @@ def visualize_dancefloor():
     screen=pygame.display.set_mode((width*rect_width,height*rect_width))
     pygame.display.set_caption("Dancefloor Simulator")
     #teken een vierkant op het scherm op positie x=0,y=0 met een breedte van 10
-    grid = Grid(width,height)
+    grid = Grid(numOfAgents,width*rect_width,height*rect_width)
 
     while 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT : sys.exit()
 
-        grid.draw(screen,rect_width,rect_width)
-        grid.updateDancers()
+        grid.draw(screen)
+        #grid.updateDancers()
 
         # refresh scherm
         pygame.display.update()
