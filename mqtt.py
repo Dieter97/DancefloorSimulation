@@ -4,7 +4,7 @@ import paho.mqtt.client as mqttclient
 class mqtt:
     listeners = []
 
-    def __init__(self, host, port, client_id="DancefloorGrid", topic="dancefloor/dj/#"):
+    def __init__(self, host, port, client_id="DancefloorGrid", topic="dancefloor/dj/dieter1/#"):
         self.host = host
         self.port = port
         self.topic = topic
@@ -18,6 +18,7 @@ class mqtt:
             func(message)
 
     def on_connect(self, client, userdata, flags, rc):
+        print(rc)
         client.subscribe(self.topic)
         print("Geconnecteerd met " + self.host)
 
@@ -36,5 +37,6 @@ class mqtt:
         self.client.loop_start()
 
     def disconnect(self):
+        print("Disconnected")
         self.client.disconnect()
         self.client.loop_stop()
