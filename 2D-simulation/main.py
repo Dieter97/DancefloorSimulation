@@ -11,7 +11,7 @@ from mqtt import mqtt
 #Variables
 width,height = 400,400
 rect_width = 1
-numOfAgents = 300
+numOfAgents = 75
 genre = "ROCK" #Init the genre currently playing
 
 # connecteer met mqtt op host *.101 en poort 1883
